@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RunFragment">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editTextDistance"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Distance (km)"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/editTextTime"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Time (minutes)"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/editTextCalories"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Calories"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editTextStreak"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Streak (days)"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/buttonAddRun"
+            android:text="Add Run"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+    </LinearLayout>
+</FrameLayout>
