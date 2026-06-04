@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,77 +12,84 @@ import java.util.ArrayList;
 
 public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.MyViewHolder> {
 
-    Context context;
-    ArrayList<RunItem> RunList;
+    private final ArrayList<RunItem> runList;
     private OnItemClickListener itemClickListener;
-    private FirebaseServices fbs;
 
-    public RunListAdapter(Context context, ArrayList<RunItem> RunList) {
-        this.context = context;
-        this.RunList = RunList;
-        this.fbs = FirebaseServices.getInstance();
+    public RunListAdapter(ArrayList<RunItem> runList) {
+        this.runList = runList;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.data_row, parent, false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        RunItem run = RunList.get(position);
+        RunItem run = runList.get(position);
 
+        holder.tvDistance.setText(run.getDistance() + " km");
+        holder.tvTime.setText(run.getTime());
+        holder.tvCalories.setText(run.getCalories() + " kcal");
+        holder.tvStreak.setText(run.getStreak() + " days");
+        holder.tvDate.setText(Utils.formatDisplayDate(run.getDate()));
 
-        // ======== النصوص ===========
-        holder.Distance.setText(run.getDistance());
-        holder.Time.setText(run.getTime());
-        holder.Calories.setText(run.getCalories());
-        holder.Streak.setText(run.getStreak());
+        String pace = run.getAvgpace();
+        holder.tvPace.setText((pace != null && !pace.isEmpty()) ? pace : "--:--");
 
+        String bpm = run.getBPM();
+        holder.tvBPM.setText((bpm != null && !bpm.isEmpty()) ? bpm + " bpm" : "--");
 
-
-
-
-
-
-        // ======== النقر على العنصر ============
         holder.itemView.setOnClickListener(v -> {
-            if (itemClickListener != null)
-                itemClickListener.onItemClick(position);
+            int pos = holder.getAdapterPosition();
+            if (itemClickListener != null && pos != RecyclerView.NO_ID)
+                itemClickListener.onItemClick(pos);
         });
     }
 
     @Override
     public int getItemCount() {
-        return RunList.size();
+        return runList.size();
     }
 
-    // ========= المفضلة ========
+    public void setRuns(ArrayList<RunItem> newRuns) {
+        runList.clear();
+        runList.addAll(newRuns);
+        notifyDataSetChanged();
+    }
 
+    public RunItem getRunAt(int position) {
+        return runList.get(position);
+    }
 
+    public void removeAt(int position) {
+        runList.remove(position);
+        notifyItemRemoved(position);
+    }
 
+    // ── ViewHolder ────────────────────────────────────────
 
-
-
-    // ========= ViewHolder ===========
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Distance, Time, Calories, Streak;
 
+        TextView tvDistance, tvTime, tvCalories, tvStreak, tvPace, tvBPM, tvDate;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            Distance = itemView.findViewById(R.id.tvDistance);
-            Time = itemView.findViewById(R.id.tvTime);
-            Calories = itemView.findViewById(R.id.tvCalories);
-            Streak = itemView.findViewById(R.id.tvStreak);
-
+            tvDistance = itemView.findViewById(R.id.tvDistanceRow);
+            tvTime     = itemView.findViewById(R.id.tvTimeRow);
+            tvCalories = itemView.findViewById(R.id.tvCaloriesRow);
+            tvStreak   = itemView.findViewById(R.id.tvStreakRow);
+            tvPace     = itemView.findViewById(R.id.tvPaceRow);
+            tvBPM      = itemView.findViewById(R.id.tvBPMRow);
+            tvDate     = itemView.findViewById(R.id.tvDateRow);
         }
     }
 
-    // ========= Interface for onClick ========
+    // ── Click interface ───────────────────────────────────
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }

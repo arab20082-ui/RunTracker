@@ -1,4 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="etEmailForgot" type="id" />
+    <item name="editTextPace" type="id" />
+    <item name="editTextBPM" type="id" />
+    <item name="btnAdd" type="id" />
+    <item name="btnAll" type="id" />
+    <item name="btnQuiz" type="id" />
+    <item name="cardUserProfile" type="id" />
+    <item name="imgUserProfile" type="id" />
+    <item name="etFirstNameProfile" type="id" />
+    <item name="etLastNameProfile" type="id" />
+    <item name="etEmailProfile" type="id" />
+    <item name="etPhoneProfile" type="id" />
+    <item name="etAddressProfile" type="id" />
+    <item name="etPasswordProfile" type="id" />
+    <item name="etConfirmPasswordProfile" type="id" />
+    <item name="ivProfileImageEdit" type="id" />
+    <item name="btnUpdateProfile" type="id" />
+    <item name="tvEmail" type="id" />
+    <item name="btnLogout" type="id" />
+    <item name="tvUsername" type="id" />
+    <item name="tvDistanceDetail" type="id" />
+    <item name="tvTimeDetail" type="id" />
+    <item name="tvCaloriesDetail" type="id" />
+    <item name="tvStreakDetail" type="id" />
+    <item name="tvPaceDetail" type="id" />
+    <item name="btnBackDetail" type="id" />
+    <item name="tvBPMDetail" type="id" />
+    <item name="tvDistanceRow" type="id" />
+    <item name="tvTimeRow" type="id" />
+    <item name="tvCaloriesRow" type="id" />
+    <item name="tvStreakRow" type="id" />
+    <item name="tvPaceRow" type="id" />
+    <item name="tvBPMRow" type="id" />
+    <item name="tvDateRow" type="id" />
+    <item name="layoutEmpty" type="id" />
+    <item name="tvTotalKm" type="id" />
+    <item name="tvTotalRuns" type="id" />
+    <item name="btnAddRunShortcut" type="id" />
+    <item name="tvRunCount" type="id" />
+    <item name="tvStreakChip" type="id" />
+    <item name="etFirstNameSignup" type="id" />
+    <item name="etLastNameSignup" type="id" />
+    <item name="etEmailSignup" type="id" />
+    <item name="etPhoneSignup" type="id" />
+    <item name="etAddressSignup" type="id" />
+    <item name="etConfirmPasswordSignup" type="id" />
+    <item name="btnSignup" type="id" />
+    <item name="tvLoginLinkSignup" type="id" />
+    <item name="btnEditProfile" type="id" />
 </resources>

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RunFragment extends Fragment {
 
-    private EditText editTextDistance, editTextTime, editTextCalories, editTextStreak;
+    private EditText editTextDistance, editTextTime, editTextCalories, editTextStreak,editTextPace,editTextBPM ;
     private Button buttonAddRun;
     private FirebaseFirestore db;
 
@@ -25,6 +26,7 @@ public class RunFragment extends Fragment {
         // Required empty constructor
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,7 +36,11 @@ public class RunFragment extends Fragment {
         editTextTime = view.findViewById(R.id.editTextTime);
         editTextCalories = view.findViewById(R.id.editTextCalories);
         editTextStreak = view.findViewById(R.id.editTextStreak);
+         editTextPace = view.findViewById(R.id.editTextPace);
+editTextBPM = view.findViewById(R.id.editTextBPM);
+
         buttonAddRun = view.findViewById(R.id.buttonAddRun);
+
 
         db = FirebaseFirestore.getInstance();
 
@@ -48,6 +54,8 @@ public class RunFragment extends Fragment {
         String time = editTextTime.getText().toString().trim();
         String calories = editTextCalories.getText().toString().trim();
         String streak = editTextStreak.getText().toString().trim();
+        String avgpace = editTextPace.getText().toString().trim();
+        String bpm = editTextBPM.getText().toString().trim();;
 
         if (TextUtils.isEmpty(distance) || TextUtils.isEmpty(time) ||
                 TextUtils.isEmpty(calories) || TextUtils.isEmpty(streak)) {
@@ -55,7 +63,8 @@ public class RunFragment extends Fragment {
             return;
         }
 
-        RunApp run = new RunApp(distance, time, calories, streak);
+
+        RunApp run = new RunApp(distance, time, calories, streak, avgpace,bpm);
 
         db.collection("runs")
                 .add(run)
@@ -63,5 +72,9 @@ public class RunFragment extends Fragment {
                         Toast.makeText(getContext(), "Run added!", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e ->
                         Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+    }
+
+    public EditText getEditTextBPM() {
+        return editTextBPM;
     }
 }

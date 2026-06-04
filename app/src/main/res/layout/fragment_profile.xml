@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F5F2">
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--            SCROLLABLE BODY                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="120dp">
+
+            <!-- ─── Header band ─── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:paddingTop="52dp"
+                android:paddingBottom="28dp">
+
+                <!-- Avatar with camera badge -->
+                <FrameLayout
+                    android:layout_width="96dp"
+                    android:layout_height="96dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        app:cardCornerRadius="48dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#E8E6E0">
+
+                        <ImageView
+                            android:id="@+id/ivProfileImageEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_user"
+                            android:contentDescription="Profile photo"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Camera badge -->
+                    <LinearLayout
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="bottom|end"
+                        android:background="@drawable/circle_bg_dark"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic_camera"
+                            android:contentDescription="Change photo" />
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit profile"
+                    android:textColor="#2C2C2A"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_marginTop="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tap the photo to change it"
+                    android:textColor="#B4B2A9"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+            <!-- ─── Personal info section ─── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Personal info"
+                android:textColor="#B4B2A9"
+                android:textSize="11sp"
+                android:letterSpacing="0.12"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="10dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="18dp">
+
+                    <!-- First name -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_user"
+                            android:alpha="0.35"
+                            android:contentDescription="Name icon" />
+
+                        <EditText
+                            android:id="@+id/etFirstNameProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:background="@null"
+                            android:hint="First name"
+                            android:textSize="14sp"
+                            android:textColor="#2C2C2A"
+                            android:textColorHint="#B4B2A9"
+                            android:fontFamily="sans-serif"
+                            android:inputType="textPersonName"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="#E8E6E0" />
+
+                    <!-- Last name -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_user"
+                            android:alpha="0.35"
+                            android:contentDescription="Name icon" />
+
+                        <EditText
+                            android:id="@+id/etLastNameProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:background="@null"
+                            android:hint="Last name"
+                            android:textSize="14sp"
+                            android:textColor="#2C2C2A"
+                            android:textColorHint="#B4B2A9"
+                            android:fontFamily="sans-serif"
+                            android:inputType="textPersonName"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="#E8E6E0" />
+
+                    <!-- Phone -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_phone"
+                            android:alpha="0.35"
+                            android:contentDescription="Phone icon" />
+
+                        <EditText
+                            android:id="@+id/etPhoneProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:background="@null"
+                            android:hint="Phone number"
+                            android:textSize="14sp"
+                            android:textColor="#2C2C2A"
+                            android:textColorHint="#B4B2A9"
+                            android:fontFamily="sans-serif"
+                            android:inputType="phone"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="#E8E6E0" />
+
+                    <!-- Address -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_location"
+                            android:alpha="0.35"
+                            android:contentDescription="Address icon" />
+
+                        <EditText
+                            android:id="@+id/etAddressProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:background="@null"
+                            android:hint="Address"
+                            android:textSize="14sp"
+                            android:textColor="#2C2C2A"
+                            android:textColorHint="#B4B2A9"
+                            android:fontFamily="sans-serif"
+                            android:inputType="textPostalAddress"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ─── Account section ─── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account"
+                android:textColor="#B4B2A9"
+                android:textSize="11sp"
+                android:letterSpacing="0.12"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="10dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="18dp">
+
+                    <!-- Email -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_mail"
+                            android:alpha="0.35"
+                            android:contentDescription="Email icon" />
+
+                        <EditText
+                            android:id="@+id/etEmailProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:background="@null"
+                            android:hint="Email address"
+                            android:textSize="14sp"
+                            android:textColor="#2C2C2A"
+                            android:textColorHint="#B4B2A9"
+                            android:fontFamily="sans-serif"
+                            android:inputType="textEmailAddress"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="#E8E6E0" />
+
+                    <!-- New password -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_lock"
+                            android:alpha="0.35"
+                            android:contentDescription="Password icon" />
+
+                        <EditText
+                            android:id="@+id/etPasswordProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:background="@null"
+                            android:hint="New password (optional)"
+                            android:textSize="14sp"
+                            android:textColor="#2C2C2A"
+                            android:textColorHint="#B4B2A9"
+                            android:fontFamily="sans-serif"
+                            android:inputType="textPassword"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="#E8E6E0" />
+
+                    <!-- Confirm password -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_lock"
+                            android:alpha="0.35"
+                            android:contentDescription="Confirm password icon" />
+
+                        <EditText
+                            android:id="@+id/etConfirmPasswordProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:background="@null"
+                            android:hint="Confirm new password"
+                            android:textSize="14sp"
+                            android:textColor="#2C2C2A"
+                            android:textColorHint="#B4B2A9"
+                            android:fontFamily="sans-serif"
+                            android:inputType="textPassword"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!--          FLOATING SAVE BUTTON              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#F6F5F2"
+        android:padding="20dp"
+        android:layout_gravity="bottom">
+
+        <Button
+            android:id="@+id/btnUpdateProfile"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Save changes"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-medium"
+            android:backgroundTint="#2C2C2A"
+            android:stateListAnimator="@null"
+            style="?attr/materialButtonStyle"
+            app:cornerRadius="16dp" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

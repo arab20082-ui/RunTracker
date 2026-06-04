@@ -1,33 +1,32 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-
 public class RunListFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private SearchView searchView;
-    private RunListAdapter adapter;
+    private RecyclerView    recyclerView;
+    private SearchView      searchView;
+    private RunListAdapter  adapter;
     private FirebaseServices fbs;
 
-    private ArrayList<RunItem> RunList = new ArrayList<>();
-    private ArrayList<RunItem> filteredList = new ArrayList<>();
+    private final ArrayList<RunItem> runList      = new ArrayList<>();
+    private final ArrayList<RunItem> filteredList = new ArrayList<>();
 
-    public RunListFragment() { }
+    public RunListFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,28 +35,31 @@ public class RunListFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        init();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init(view);
         loadRunFromFirebase();
     }
 
-    private void init() {
-        recyclerView = getView().findViewById(R.id.rvRunlist);
-        searchView = getView().findViewById(R.id.srchViewRun);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
-
+    private void init(View view) {
         fbs = FirebaseServices.getInstance();
 
-        adapter = new RunListAdapter(getActivity(), RunList);
+        recyclerView = view.findViewById(R.id.rvRunlist);
+        searchView   = view.findViewById(R.id.srchViewRun);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+
+        adapter = new RunListAdapter(runList);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(position -> {
-            Toast.makeText(getActivity(),
-                    "Clicked: " + RunList.get(position).getDistance(),
-                    Toast.LENGTH_SHORT).show();
+            RunItem clicked = runList.get(position);
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frameLayout, RunDetailsFragment.newInstance(clicked))
+                    .addToBackStack(null)
+                    .commit();
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -76,41 +78,40 @@ public class RunListFragment extends Fragment {
     }
 
     private void loadRunFromFirebase() {
-        fbs.getFirestore().collection("runs" )
+        fbs.getUserRuns(task -> {
+            if (!isAdded() || getContext() == null) return;
 
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        RunList.clear();
-                        for (QueryDocumentSnapshot doc : task.getResult()) {
-                            RunItem sm = doc.toObject(RunItem.class);
-                            RunList.add(sm);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+            if (task.isSuccessful() && task.getResult() != null) {
+                runList.clear();
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    RunItem run = doc.toObject(RunItem.class);
+                    run.setId(doc.getId());
+                    runList.add(run);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
-
     private void applyFilter(String query) {
         if (query.trim().isEmpty()) {
-            adapter = new RunListAdapter(getActivity(), RunList);
-            recyclerView.setAdapter(adapter);
+            adapter.setRuns(runList);
             return;
         }
-
         filteredList.clear();
+        String lower = query.toLowerCase();
 
-        for (RunItem sm : RunList) {
-            if (sm.getDistance().toLowerCase().contains(query.toLowerCase()) ||
-                    sm.getTime().toLowerCase().contains(query.toLowerCase()) ||
-                    sm.getCalories().toLowerCase().contains(query.toLowerCase()) ||
-                    sm.getStreak().toLowerCase().contains(query.toLowerCase())
-            ) {
-                filteredList.add(sm);
+        for (RunItem run : runList) {
+            String dist     = run.getDistance() != null ? run.getDistance() : "";
+            String time     = run.getTime()     != null ? run.getTime()     : "";
+            String calories = run.getCalories() != null ? run.getCalories() : "";
+            String streak   = run.getStreak()   != null ? run.getStreak()   : "";
+            if (dist.toLowerCase().contains(lower)     ||
+                    time.toLowerCase().contains(lower)     ||
+                    calories.toLowerCase().contains(lower) ||
+                    streak.toLowerCase().contains(lower)) {
+                filteredList.add(run);
             }
         }
-
-        adapter = new RunListAdapter(getActivity(), filteredList);
-        recyclerView.setAdapter(adapter);
+        adapter.setRuns(filteredList);
     }
 }

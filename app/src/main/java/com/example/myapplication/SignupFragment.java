@@ -1,78 +1,114 @@
 package com.example.myapplication;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.auth.User;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class SignupFragment extends Fragment {
 
-    private EditText etUsername, etPassword;
+    private EditText etFirstName, etLastName, etEmail, etPhone,
+            etAddress, etPassword, etConfirmPassword;
     private Button btnSignup;
     private FirebaseServices fbs;
 
-    public SignupFragment() {
-        // Required empty public constructor
-    }
-
+    public SignupFragment() {}
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,  // ✅ inflate only
                              Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_signup2, container, false);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { // ✅ bind here
+        super.onViewCreated(view, savedInstanceState);
 
-        // Inflate and get the root view
-        View view = inflater.inflate(R.layout.fragment_signup2, container, false);
-
-        // Connect XML views
-        etUsername = view.findViewById(R.id.etUsernameSignup);
-        etPassword = view.findViewById(R.id.etPasswordSignup);
-        btnSignup  = view.findViewById(R.id.btnSignupSignup);
-
-        // Firebase instance
         fbs = FirebaseServices.getInstance();
 
-        // Button click
-        btnSignup.setOnClickListener(v -> {
+        etFirstName       = view.findViewById(R.id.etFirstNameSignup);
+        etLastName        = view.findViewById(R.id.etLastNameSignup);
+        etEmail           = view.findViewById(R.id.etEmailSignup);
+        etPhone           = view.findViewById(R.id.etPhoneSignup);
+        etAddress         = view.findViewById(R.id.etAddressSignup);
+        etPassword        = view.findViewById(R.id.etPasswordSignup);
+        etConfirmPassword = view.findViewById(R.id.etConfirmPasswordSignup);
+        btnSignup         = view.findViewById(R.id.btnSignup);
 
-            String username = etUsername.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
+        view.findViewById(R.id.tvLoginLinkSignup).setOnClickListener(v ->
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, new LoginFragment())
+                        .addToBackStack(null)
+                        .commit()
+        );
 
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(getActivity(), "Some fields are empty!", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        btnSignup.setOnClickListener(v -> attemptSignup());
+    }
 
-            fbs.getAuth().createUserWithEmailAndPassword(username, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getActivity(), "You have successfully signed up!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "Failed to sign up! Check email or password!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        });
+    private void attemptSignup() {
+        String firstName = etFirstName.getText().toString().trim();
+        String lastName  = etLastName.getText().toString().trim();
+        String email     = etEmail.getText().toString().trim();
+        String phone     = etPhone.getText().toString().trim();
+        String address   = etAddress.getText().toString().trim();
+        String password  = etPassword.getText().toString().trim();
+        String confirm   = etConfirmPassword.getText().toString().trim();
 
-        return view;
+        // ✅ All fields present
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() ||
+                phone.isEmpty() || address.isEmpty() || password.isEmpty()) {
+            Toast.makeText(getContext(), "Some fields are empty.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // ✅ Email format
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("Enter a valid email address");
+            etEmail.requestFocus();
+            return;
+        }
+
+        // ✅ Password length
+        if (password.length() < 6) {
+            etPassword.setError("Password must be at least 6 characters");
+            etPassword.requestFocus();
+            return;
+        }
+
+        // ✅ Passwords match
+        if (!password.equals(confirm)) {
+            etConfirmPassword.setError("Passwords do not match");
+            etConfirmPassword.requestFocus();
+            return;
+        }
+
+        fbs.getAuth().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (!isAdded() || getContext() == null) return; // ✅ async guard
+
+                    if (task.isSuccessful()) {
+                        // ✅ Save user document to Firestore
+                        // User constructor: username, firstName, lastName, email, address, phone, imgpro
+                        User newUser = new User(email, firstName, lastName, email, address, phone, "");
+                        fbs.createUser(newUser, saveTask -> {
+                            if (!isAdded() || getContext() == null) return;
+                            // ✅ Navigate to dashboard, no back stack
+                            requireActivity().getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.frameLayout, new AdminFragment())
+                                    .commit();
+                        });
+                    } else {
+                        Toast.makeText(getContext(),
+                                "Signup failed. Check your email or password.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

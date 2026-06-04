@@ -1,36 +1,32 @@
 package com.example.myapplication;
 
-public class RunApp {
-    private String distance;
-    private String time;
-    private String calories;
-    private String streak;
+import android.app.Application;
 
-    public RunApp() {
-        // Firestore requires empty constructor
+import com.google.firebase.FirebaseApp;
+
+public class RunApp extends Application {
+
+    private static RunApp instance;
+
+    public RunApp(String distance, String time, String calories, String streak, String avgpace, String bpm) {
     }
 
-    public RunApp(String distance, String time, String calories, String streak) {
-        this.distance = distance;
-        this.time = time;
-        this.calories = calories;
-        this.streak = streak;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        // Store global application instance
+        instance = this;
+
+        // Initialize Firebase once for the entire app lifetime
+        FirebaseApp.initializeApp(this);
     }
 
-    public String getDistance() {
-        return distance;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public String getCalories() {
-        return calories;
-    }
-
-    public String getStreak() {
-        return streak;
+    /**
+     * Returns the global Application instance.
+     * Useful for getting context outside of Activities/Fragments.
+     */
+    public static RunApp getInstance() {
+        return instance;
     }
 }
-
