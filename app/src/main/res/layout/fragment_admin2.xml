@@ -1,450 +1,686 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F5F2"
-    android:fillViewport="true">
+    android:background="#0D0D0D">
 
-    <LinearLayout
+    <!-- ══════════════════════════════════════════ -->
+    <!--              SCROLLABLE BODY              -->
+    <!-- ══════════════════════════════════════════ -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="32dp">
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:fillViewport="true">
 
-        <!-- ══════════════════════════════════════ -->
-        <!--          TOP HEADER BAR               -->
-        <!-- ══════════════════════════════════════ -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="24dp"
-            android:paddingTop="52dp"
-            android:paddingBottom="20dp"
-            android:gravity="center_vertical">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:text="Good morning,"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#888780"
-                    android:textSize="14sp"
-                    android:fontFamily="sans-serif" />
-
-                <TextView
-                    android:text="Dashboard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#2C2C2A"
-                    android:textSize="26sp"
-                    android:fontFamily="sans-serif-light"
-                    android:layout_marginTop="2dp" />
-
-            </LinearLayout>
-
-            <!-- Profile Card (tappable) -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardUserProfile"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                app:cardCornerRadius="26dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#E8E6E0"
-                android:foreground="?attr/selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:id="@+id/imgUserProfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_user"
-                    android:contentDescription="User profile" />
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-        <!-- ══════════════════════════════════════ -->
-        <!--         QUICK STATS ROW               -->
-        <!-- ══════════════════════════════════════ -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="20dp"
-            android:layout_marginBottom="24dp"
-            android:weightSum="3">
-
-            <!-- Stat: Total Runs -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="4dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="14dp">
-
-                    <TextView
-                        android:text="runs"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#888780"
-                        android:textSize="11sp"
-                        android:fontFamily="sans-serif"
-                        android:letterSpacing="0.05" />
-
-                    <TextView
-                        android:text="48"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2C2C2A"
-                        android:textSize="28sp"
-                        android:fontFamily="sans-serif-light"
-                        android:layout_marginTop="2dp" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Stat: Total KM -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="4dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="14dp">
-
-                    <TextView
-                        android:text="km total"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#888780"
-                        android:textSize="11sp"
-                        android:fontFamily="sans-serif"
-                        android:letterSpacing="0.05" />
-
-                    <TextView
-                        android:text="312"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2C2C2A"
-                        android:textSize="28sp"
-                        android:fontFamily="sans-serif-light"
-                        android:layout_marginTop="2dp" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Stat: Streak -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="4dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="14dp">
-
-                    <TextView
-                        android:text="streak"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#888780"
-                        android:textSize="11sp"
-                        android:fontFamily="sans-serif"
-                        android:letterSpacing="0.05" />
-
-                    <TextView
-                        android:text="12d"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2C2C2A"
-                        android:textSize="28sp"
-                        android:fontFamily="sans-serif-light"
-                        android:layout_marginTop="2dp" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-        <!-- ══════════════════════════════════════ -->
-        <!--         SECTION LABEL                 -->
-        <!-- ══════════════════════════════════════ -->
-        <TextView
-            android:text="Actions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#B4B2A9"
-            android:textSize="11sp"
-            android:letterSpacing="0.12"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="12dp" />
-
-        <!-- ══════════════════════════════════════ -->
-        <!--       PRIMARY ACTION: ADD RUN         -->
-        <!-- ══════════════════════════════════════ -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="10dp"
-            app:cardBackgroundColor="#2C2C2A"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
-                android:id="@+id/btnAdd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:background="@drawable/circle_bg_light"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_add_run"
-                        android:contentDescription="Add run icon" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginStart="14dp">
-
-                    <TextView
-                        android:text="Log a new run"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:fontFamily="sans-serif-medium" />
-
-                    <TextView
-                        android:text="Track distance, pace &amp; calories"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#888780"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp"
-                        android:fontFamily="sans-serif" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_arrow_right"
-                    android:alpha="0.4"
-                    android:contentDescription="Navigate" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- ══════════════════════════════════════ -->
-        <!--      SECONDARY ACTION: ALL RUNS       -->
-        <!-- ══════════════════════════════════════ -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="10dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
-                android:id="@+id/btnAll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:background="@drawable/circle_bg_sand"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_list"
-                        android:contentDescription="All runs icon" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginStart="14dp">
-
-                    <TextView
-                        android:text="All runs"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2C2C2A"
-                        android:textSize="16sp"
-                        android:fontFamily="sans-serif-medium" />
-
-                    <TextView
-                        android:text="Browse your run history"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#888780"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp"
-                        android:fontFamily="sans-serif" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_arrow_right"
-                    android:alpha="0.25"
-                    android:contentDescription="Navigate" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- ══════════════════════════════════════ -->
-        <!--      TERTIARY: USER PROFILE ROW       -->
-        <!-- ══════════════════════════════════════ -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="10dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp"
-                android:gravity="center_vertical">
-
-                <LinearLayout
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:background="@drawable/circle_bg_sand"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/ic_user"
-                        android:contentDescription="Profile icon" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginStart="14dp">
-
-                    <TextView
-                        android:text="Your profile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#2C2C2A"
-                        android:textSize="16sp"
-                        android:fontFamily="sans-serif-medium" />
-
-                    <TextView
-                        android:text="Edit info, photo &amp; settings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#888780"
-                        android:textSize="13sp"
-                        android:layout_marginTop="2dp"
-                        android:fontFamily="sans-serif" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_arrow_right"
-                    android:alpha="0.25"
-                    android:contentDescription="Navigate" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- ══════════════════════════════════════ -->
-        <!--          MOTIVATIONAL FOOTER          -->
-        <!-- ══════════════════════════════════════ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="32dp"
-            android:paddingHorizontal="24dp">
+            android:paddingBottom="80dp">
 
+            <!-- ══════════════════════════════════ -->
+            <!--            TOP NAV BAR            -->
+            <!-- ══════════════════════════════════ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="48dp"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical"
+                android:background="#0D0D0D">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="STRIDE"
+                    android:textColor="#C8F400"
+                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-black"
+                    android:letterSpacing="0.06" />
+
+                <ImageButton
+                    android:id="@+id/btnNotifications"
+                    android:layout_width="78dp"
+                    android:layout_height="72dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@null"
+                    android:contentDescription="Notifications"
+                    android:src="@drawable/ic_bell" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardNavProfile"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    app:cardCornerRadius="19dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#333333"
+                    android:foreground="?attr/selectableItemBackgroundBorderless">
+                    <ImageView
+                        android:id="@+id/imgNavProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_user"
+                        android:contentDescription="Profile" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <!-- ══════════════════════════════════ -->
+            <!--           HERO SECTION            -->
+            <!-- ══════════════════════════════════ -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Hero image card -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#1A1A1A"
+                        android:layout_marginBottom="16dp">
+
+                        <ImageView
+                            android:id="@+id/ivHeroImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/run_hero_photo"
+                            android:contentDescription="Hero run photo" />
+
+                        <!-- Dark overlay -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient_hero_overlay" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Daily goal chip -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/chip_lime"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/tvDailyGoal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DAILY GOAL: 5KM"
+                            android:textColor="#0D0D0D"
+                            android:textSize="11sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:letterSpacing="0.10" />
+
+                    </LinearLayout>
+
+                    <!-- Hero headline -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="READY TO RUN?"
+                        android:textColor="#FFFFFF"
+                        android:textSize="32sp"
+                        android:fontFamily="sans-serif-black"
+                        android:letterSpacing="0.02"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="The morning air is crisp. Perfect conditions to break your personal record."
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif"
+                        android:lineSpacingMultiplier="1.4"
+                        android:layout_marginBottom="20dp" />
+
+                    <!-- START RUN button -->
+                    <Button
+                        android:id="@+id/btnStartRun"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="START RUN"
+                        android:textColor="#0D0D0D"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif-black"
+                        android:letterSpacing="0.08"
+                        android:backgroundTint="#C8F400"
+                        android:stateListAnimator="@null"
+                        style="?attr/materialButtonStyle"
+                        app:cornerRadius="8dp"
+                        app:icon="@drawable/ic_play"
+                        app:iconGravity="end"
+                        app:iconTint="#0D0D0D"
+                        app:iconSize="20dp" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- ══════════════════════════════════ -->
+            <!--        WEEKLY PROGRESS            -->
+            <!-- ══════════════════════════════════ -->
             <TextView
-                android:text="Every run counts."
+                android:text="WEEKLY PROGRESS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#B4B2A9"
-                android:textSize="13sp"
-                android:fontFamily="sans-serif"
-                android:gravity="center" />
+                android:textColor="#888888"
+                android:textSize="11sp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.14"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="10dp" />
 
+            <!-- Distance card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:text="DISTANCE (KM)"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#888888"
+                        android:textSize="10sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.12"
+                        android:layout_marginBottom="4dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="14dp">
+
+                        <TextView
+                            android:id="@+id/tvWeeklyDistance"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="42.8"
+                            android:textColor="#FFFFFF"
+                            android:textSize="52sp"
+                            android:fontFamily="sans-serif-black"
+                            android:includeFontPadding="false" />
+
+                        <TextView
+                            android:id="@+id/tvDistanceChange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+12%"
+                            android:textColor="#C8F400"
+                            android:textSize="14sp"
+                            android:fontFamily="sans-serif-medium" />
+
+                    </LinearLayout>
+
+                    <!-- Bar chart placeholder -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal"
+                        android:gravity="bottom"
+                        android:weightSum="7">
+
+                        <View android:layout_width="0dp" android:layout_height="20dp" android:layout_weight="1" android:background="#333333" android:layout_marginHorizontal="3dp" />
+                        <View android:layout_width="0dp" android:layout_height="28dp" android:layout_weight="1" android:background="#333333" android:layout_marginHorizontal="3dp" />
+                        <View android:layout_width="0dp" android:layout_height="16dp" android:layout_weight="1" android:background="#333333" android:layout_marginHorizontal="3dp" />
+                        <View android:layout_width="0dp" android:layout_height="44dp" android:layout_weight="1" android:background="#C8F400" android:layout_marginHorizontal="3dp" />
+                        <View android:layout_width="0dp" android:layout_height="24dp" android:layout_weight="1" android:background="#333333" android:layout_marginHorizontal="3dp" />
+                        <View android:layout_width="0dp" android:layout_height="32dp" android:layout_weight="1" android:background="#333333" android:layout_marginHorizontal="3dp" />
+                        <View android:layout_width="0dp" android:layout_height="18dp" android:layout_weight="1" android:background="#333333" android:layout_marginHorizontal="3dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Avg Pace card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:text="AVG PACE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#888888"
+                        android:textSize="10sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.12"
+                        android:layout_marginBottom="4dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:orientation="horizontal"
+                        tools:ignore="ExtraText">
+
+                        <TextView
+                            android:id="@+id/tvAvgPace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5'12\""
+                        android:textColor="#FFFFFF"
+                        android:textSize="36sp"
+                        android:fontFamily="sans-serif-black"
+                        android:includeFontPadding="false" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text=" /KM"
+                            android:textColor="#888888"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Avg HR card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="AVG HR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#888888"
+                            android:textSize="10sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:letterSpacing="0.12"
+                            android:layout_marginBottom="4dp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="bottom">
+
+                            <TextView
+                                android:id="@+id/tvAvgHR"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="148"
+                                android:textColor="#FFFFFF"
+                                android:textSize="36sp"
+                                android:fontFamily="sans-serif-black"
+                                android:includeFontPadding="false" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" BPM"
+                                android:textColor="#888888"
+                                android:textSize="13sp"
+                                android:fontFamily="sans-serif-medium"
+                                android:layout_marginBottom="6dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_heart"
+                        android:alpha="0.5"
+                        android:contentDescription="Heart rate" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ══════════════════════════════════ -->
+            <!--       CONTINUE TRAINING           -->
+            <!-- ══════════════════════════════════ -->
+            <TextView
+                android:text="CONTINUE TRAINING"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#888888"
+                android:textSize="11sp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.14"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="10dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardTraining"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                android:foreground="?attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/run_hero_photo"
+                    android:alpha="0.35"
+                    android:contentDescription="Training background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="bottom">
+
+                    <TextView
+                        android:id="@+id/tvTrainingTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WEEK 4 · SESSION 2"
+                        android:textColor="#C8F400"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.08"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/tvTrainingName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="INTERVAL SPRINTS"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        android:fontFamily="sans-serif-black"
+                        android:letterSpacing="0.02"
+                        android:layout_marginBottom="10dp" />
+
+                    <!-- Progress bar row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="4dp"
+                            android:layout_weight="1"
+                            android:background="#333333"
+                            android:layout_marginEnd="10dp">
+
+                            <View
+                                android:layout_width="75%"
+                                android:layout_height="match_parent"
+                                android:background="#C8F400" />
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvTrainingProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="75% COMPLETE"
+                            android:textColor="#888888"
+                            android:textSize="11sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:letterSpacing="0.06" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ══════════════════════════════════ -->
+            <!--        LATEST ACTIVITY            -->
+            <!-- ══════════════════════════════════ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:text="LATEST ACTIVITY"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#888888"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="0.14" />
+
+                <TextView
+                    android:id="@+id/tvViewAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VIEW ALL"
+                    android:textColor="#C8F400"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="0.10"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
+            </LinearLayout>
+
+            <!-- Activity row card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardLatestActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="14dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Icon -->
+                    <LinearLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/circle_bg_lime"
+                        android:gravity="center"
+                        android:layout_marginEnd="12dp">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_run_shoe"
+                            android:contentDescription="Run" />
+
+                    </LinearLayout>
+
+                    <!-- Details -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvActivityName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RIVERSIDE MORNING RUN"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp"
+                            android:fontFamily="sans-serif-bold"
+                            android:letterSpacing="0.02" />
+
+                        <TextView
+                            android:id="@+id/tvActivityMeta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YESTERDAY · 8.42 KM · 44:12"
+                            android:textColor="#888888"
+                            android:textSize="11sp"
+                            android:fontFamily="sans-serif"
+                            android:layout_marginTop="3dp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_arrow_right"
+                        android:alpha="0.4"
+                        android:contentDescription="Open" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--           BOTTOM NAV BAR                  -->
+    <!-- ══════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:background="#0D0D0D"
+        android:layout_gravity="bottom"
+        android:weightSum="4">
+
+        <!-- HOME -->
+        <LinearLayout
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/nav_item_bg_active">
+
+            <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_home" android:contentDescription="Home" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HOME" android:textColor="#C8F400" android:textSize="9sp" android:fontFamily="sans-serif-medium" android:letterSpacing="0.06" android:layout_marginTop="3dp" />
+        </LinearLayout>
+
+        <!-- RUN -->
+        <LinearLayout
+            android:id="@+id/navRun"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_play" android:alpha="0.5" android:contentDescription="Run" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="RUN" android:textColor="#555555" android:textSize="9sp" android:fontFamily="sans-serif-medium" android:letterSpacing="0.06" android:layout_marginTop="3dp" />
+        </LinearLayout>
+
+        <!-- PLANS -->
+        <LinearLayout
+            android:id="@+id/navPlans"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_calendar" android:alpha="0.5" android:contentDescription="Plans" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PLANS" android:textColor="#555555" android:textSize="9sp" android:fontFamily="sans-serif-medium" android:letterSpacing="0.06" android:layout_marginTop="3dp" />
+        </LinearLayout>
+
+        <!-- HISTORY -->
+        <LinearLayout
+            android:id="@+id/navHistory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_history" android:alpha="0.5" android:contentDescription="History" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HISTORY" android:textColor="#555555" android:textSize="9sp" android:fontFamily="sans-serif-medium" android:letterSpacing="0.06" android:layout_marginTop="3dp" />
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

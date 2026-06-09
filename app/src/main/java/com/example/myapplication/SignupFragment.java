@@ -12,6 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+
 public class SignupFragment extends Fragment {
 
     private EditText etFirstName, etLastName, etEmail, etPhone,
@@ -96,6 +100,19 @@ public class SignupFragment extends Fragment {
                         // ✅ Save user document to Firestore
                         // User constructor: username, firstName, lastName, email, address, phone, imgpro
                         User newUser = new User(email, firstName, lastName, email, address, phone, "");
+
+                        fbs.getFirestore().collection("users").add(newUser).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+                        /*
                         fbs.createUser(newUser, saveTask -> {
                             if (!isAdded() || getContext() == null) return;
                             // ✅ Navigate to dashboard, no back stack
@@ -103,7 +120,7 @@ public class SignupFragment extends Fragment {
                                     .beginTransaction()
                                     .replace(R.id.frameLayout, new AdminFragment())
                                     .commit();
-                        });
+                        });*/
                     } else {
                         Toast.makeText(getContext(),
                                 "Signup failed. Check your email or password.",

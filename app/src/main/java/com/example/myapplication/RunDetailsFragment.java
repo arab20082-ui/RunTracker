@@ -42,7 +42,6 @@ public class RunDetailsFragment extends Fragment {
         args.putString(ARG_TIME, runItem.getTime());
         args.putString(ARG_CALORIES, runItem.getCalories());
         args.putString(ARG_STREAK, runItem.getStreak());
-        args.putString(ARG_PACE, runItem.getAvgpace());
         args.putString(ARG_BPM, runItem.getBPM());
 
         fragment.setArguments(args);

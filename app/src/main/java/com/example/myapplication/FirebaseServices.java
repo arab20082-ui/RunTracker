@@ -85,5 +85,8 @@ public class FirebaseServices {
 
     public void signOut() {
     }
+
+    public String getCurrentUid() {return null;
+    }
 }
 

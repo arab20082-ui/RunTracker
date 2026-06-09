@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources><!--
     <item name="etEmailForgot" type="id" />
     <item name="editTextPace" type="id" />
     <item name="editTextBPM" type="id" />
@@ -49,4 +49,11 @@
     <item name="btnSignup" type="id" />
     <item name="tvLoginLinkSignup" type="id" />
     <item name="btnEditProfile" type="id" />
+    <item name="tvfirstNameRow" type="id" />
+    <item name="editTextDistance" type="id" />
+    <item name="editTextTime" type="id" />
+    <item name="editTextCalories" type="id" />
+    <item name="editTextStreak" type="id" />
+    <item name="buttonAddRun" type="id" />
+    -->
 </resources>

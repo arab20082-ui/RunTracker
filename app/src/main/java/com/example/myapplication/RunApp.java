@@ -11,6 +11,9 @@ public class RunApp extends Application {
     public RunApp(String distance, String time, String calories, String streak, String avgpace, String bpm) {
     }
 
+    public RunApp(String distance, String time, String calories, String streak, String bpm) {
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

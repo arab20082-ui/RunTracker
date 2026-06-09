@@ -39,14 +39,20 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { // ✅ correct lifecycle
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
 
         fbs = FirebaseServices.getInstance();
 
-        etUsername     = view.findViewById(R.id.etUsernameLogin);   // ✅ use view param
-        etPassword     = view.findViewById(R.id.etPasswordLogin);
-        btnLogin       = view.findViewById(R.id.btnLoginLogin);
-        tvSignupLink   = view.findViewById(R.id.tvSignupLinkLogin);
-        tvForgotpassword = view.findViewById(R.id.tvForgotPasswordLogin);
+        etUsername     = getView().findViewById(R.id.etUsernameLogin);   // ✅ use view param
+        etPassword     = getView().findViewById(R.id.etPasswordLogin);
+        btnLogin       = getView().findViewById(R.id.btnLoginLogin);
+        tvSignupLink   = getView().findViewById(R.id.tvSignupLinkLogin);
+        tvForgotpassword = getView().findViewById(R.id.tvForgotPasswordLogin);
 
         tvForgotpassword.setOnClickListener(v -> gotoForgotPasswordFragment());
         tvSignupLink.setOnClickListener(v -> gotoSignupFragment());
@@ -67,6 +73,7 @@ public class LoginFragment extends Fragment {
 
             fbs.getAuth().signInWithEmailAndPassword(username, password)
                     .addOnCompleteListener(requireActivity(), task -> {
+
                         if (!isAdded() || getContext() == null) return;    // ✅ safe context guard
 
                         if (task.isSuccessful()) {
@@ -84,6 +91,7 @@ public class LoginFragment extends Fragment {
                         }
                     });
         });
+
     }
 
     private void gotoSignupFragment() {

@@ -9,11 +9,10 @@ public class RunItem {
     private String time;
     private String calories;
     private String streak;
-    private String avgpace;
     private String BPM;       // ✅ consistent casing with all other classes
 
     // ✅ Required empty constructor for Firestore deserialization
-    public RunItem() {}
+    public RunItem(String distance, String time, String calories, String streak, String bpm) {}
 
     public RunItem(String distance, String time, String calories,
                    String streak, String avgpace, String BPM,

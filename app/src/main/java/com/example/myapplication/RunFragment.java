@@ -32,14 +32,13 @@ public class RunFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_run, container, false);
 
-        editTextDistance = view.findViewById(R.id.editTextDistance);
-        editTextTime = view.findViewById(R.id.editTextTime);
-        editTextCalories = view.findViewById(R.id.editTextCalories);
-        editTextStreak = view.findViewById(R.id.editTextStreak);
-         editTextPace = view.findViewById(R.id.editTextPace);
-editTextBPM = view.findViewById(R.id.editTextBPM);
+        editTextDistance = view.findViewById(R.id.etDistanceRun);
+        editTextTime = view.findViewById(R.id.etTimeRun);
+        editTextCalories = view.findViewById(R.id.etCaloriesRun);
+        editTextStreak = view.findViewById(R.id.etStreakRun);
+editTextBPM = view.findViewById(R.id.etBPMRun);
 
-        buttonAddRun = view.findViewById(R.id.buttonAddRun);
+        buttonAddRun = view.findViewById(R.id.btnSaveRun);
 
 
         db = FirebaseFirestore.getInstance();
@@ -54,7 +53,6 @@ editTextBPM = view.findViewById(R.id.editTextBPM);
         String time = editTextTime.getText().toString().trim();
         String calories = editTextCalories.getText().toString().trim();
         String streak = editTextStreak.getText().toString().trim();
-        String avgpace = editTextPace.getText().toString().trim();
         String bpm = editTextBPM.getText().toString().trim();;
 
         if (TextUtils.isEmpty(distance) || TextUtils.isEmpty(time) ||
@@ -64,7 +62,17 @@ editTextBPM = view.findViewById(R.id.editTextBPM);
         }
 
 
-        RunApp run = new RunApp(distance, time, calories, streak, avgpace,bpm);
+        RunItem run = new RunItem(distance,
+                time,
+                calories,
+                streak ,
+                bpm);
+
+        /*
+        *     public RunItem(String distance, String time, String calories,
+                   String streak, String avgpace, String BPM,
+                   String date, String userId)*/
+
 
         db.collection("runs")
                 .add(run)

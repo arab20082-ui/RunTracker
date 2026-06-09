@@ -34,4 +34,9 @@
     <drawable name="circle_bg_amber" />
     <drawable name="ic_clock" />
     <drawable name="ic_bolt" />
+    <drawable name="ic_history" />
+    <drawable name="nav_item_bg_active" />
+    <drawable name="ic_home" />
+    <drawable name="ic_play" />
+    <drawable name="circle_bg_lime" />
 </resources>
