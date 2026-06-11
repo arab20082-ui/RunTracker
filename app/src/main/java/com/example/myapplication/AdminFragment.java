@@ -22,29 +22,25 @@ import com.squareup.picasso.Picasso;
 public class AdminFragment extends Fragment {
 
     // ── Views ─────────────────────────────────────────────
-    private ImageView  imgNavProfile;
-    private CardView   cardNavProfile;
-    private Button     btnStartRun;
-    private TextView   tvDailyGoal;
-    private TextView   tvWeeklyDistance;
-    private TextView   tvDistanceChange;
-    private TextView   tvAvgPace;
-    private TextView   tvAvgHR;
-    private TextView   tvTrainingTag;
-    private TextView   tvTrainingName;
-    private TextView   tvTrainingProgress;
-    private TextView   tvActivityName;
-    private TextView   tvActivityMeta;
-    private TextView   tvViewAll;
-    private View       cardTraining;
-    private View       cardLatestActivity;
-    private View       navRun;
-    private View       navPlans;
-    private View       navHistory;
+    private ImageView imgNavProfile;
+    private ImageView ivHeroImage;       // ✅ hero running photo
+    private ImageView ivTrainingBg;      // ✅ training card photo
+    private CardView  cardNavProfile;
+    private Button    btnStartRun;
+    private TextView  tvDailyGoal, tvWeeklyDistance, tvDistanceChange;
+    private TextView  tvAvgPace, tvAvgHR;
+    private TextView  tvActivityName, tvActivityMeta, tvViewAll;
+    private View      cardTraining, cardLatestActivity;
+    private View      navRun, navPlans, navHistory;
 
     // ── Firebase ──────────────────────────────────────────
-    private FirebaseServices fbs;
+    private FirebaseServices  fbs;
     private FirebaseFirestore db;
+
+    // ✅ Beautiful free running photo (Unsplash — no API key needed)
+    private static final String HERO_IMAGE_URL =
+            "https://images.unsplash.com/photo-1571008887538-b36bb32f4571" +
+                    "?w=800&q=80&fit=crop";
 
     public AdminFragment() {}
 
@@ -60,11 +56,10 @@ public class AdminFragment extends Fragment {
     public void onViewCreated(@NonNull View view,
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         fbs = FirebaseServices.getInstance();
         db  = FirebaseFirestore.getInstance();
-
         bindViews(view);
+        loadHeroPhoto();       // ✅ load the running photo
         setupNavigation();
         loadUserProfileImage();
         loadWeeklyStats();
@@ -73,13 +68,16 @@ public class AdminFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadUserProfileImage(); // refresh avatar when returning from ProfileFragment
+        loadUserProfileImage();
+        loadWeeklyStats();
     }
 
-    // ── View binding ───────────────────────────────────────
+    // ── Binding ───────────────────────────────────────────
 
     private void bindViews(View view) {
         imgNavProfile      = view.findViewById(R.id.imgNavProfile);
+        ivHeroImage        = view.findViewById(R.id.ivHeroImage);
+        ivTrainingBg       = view.findViewById(R.id.ivTrainingBg);
         cardNavProfile     = view.findViewById(R.id.cardNavProfile);
         btnStartRun        = view.findViewById(R.id.btnStartRun);
         tvDailyGoal        = view.findViewById(R.id.tvDailyGoal);
@@ -87,9 +85,6 @@ public class AdminFragment extends Fragment {
         tvDistanceChange   = view.findViewById(R.id.tvDistanceChange);
         tvAvgPace          = view.findViewById(R.id.tvAvgPace);
         tvAvgHR            = view.findViewById(R.id.tvAvgHR);
-        tvTrainingTag      = view.findViewById(R.id.tvTrainingTag);
-        tvTrainingName     = view.findViewById(R.id.tvTrainingName);
-        tvTrainingProgress = view.findViewById(R.id.tvTrainingProgress);
         tvActivityName     = view.findViewById(R.id.tvActivityName);
         tvActivityMeta     = view.findViewById(R.id.tvActivityMeta);
         tvViewAll          = view.findViewById(R.id.tvViewAll);
@@ -100,61 +95,62 @@ public class AdminFragment extends Fragment {
         navHistory         = view.findViewById(R.id.navHistory);
     }
 
-    // ── Navigation ─────────────────────────────────────────
+    // ── Hero photo ────────────────────────────────────────
 
-    private void setupNavigation() {
+    private void loadHeroPhoto() {
+        if (ivHeroImage == null) return;
 
-        // START RUN → RunFragment
-        btnStartRun.setOnClickListener(v -> navigateTo(new RunFragment()));
+        // ✅ Load beautiful running photo from Unsplash
+        Picasso.get()
+                .load(HERO_IMAGE_URL)
+                .placeholder(android.R.color.black)  // black while loading
+                .error(android.R.color.black)         // black if no internet
+                .into(ivHeroImage);
 
-        // Profile avatar → UserProfileFragment
-        cardNavProfile.setOnClickListener(v -> navigateTo(new UserProfileFragment()));
-
-        // VIEW ALL → RunListFragment
-        tvViewAll.setOnClickListener(v -> navigateTo(new RunListFragment()));
-
-        // Latest activity card → RunListFragment
-        cardLatestActivity.setOnClickListener(v -> navigateTo(new RunListFragment()));
-
-        // Training card → RunFragment
-        cardTraining.setOnClickListener(v -> navigateTo(new RunFragment()));
-
-        // Bottom nav — RUN
-        navRun.setOnClickListener(v -> navigateTo(new RunFragment()));
-
-        // Bottom nav — PLANS (placeholder: reuse RunListFragment until Plans screen exists)
-        navPlans.setOnClickListener(v -> navigateTo(new RunListFragment()));
-
-        // Bottom nav — HISTORY
-        navHistory.setOnClickListener(v -> navigateTo(new RunListFragment()));
+        // Same photo at lower opacity for training card
+        if (ivTrainingBg != null) {
+            Picasso.get()
+                    .load(HERO_IMAGE_URL)
+                    .placeholder(android.R.color.black)
+                    .error(android.R.color.black)
+                    .into(ivTrainingBg);
+        }
     }
 
-    /** Replace current fragment and add to back stack. */
-    private void navigateTo(Fragment destination) {
+    // ── Navigation ────────────────────────────────────────
+
+    private void setupNavigation() {
+        btnStartRun.setOnClickListener(v -> go(new RunFragment()));
+        cardNavProfile.setOnClickListener(v -> go(new UserProfileFragment()));
+        tvViewAll.setOnClickListener(v -> go(new RunListFragment()));
+        cardLatestActivity.setOnClickListener(v -> go(new RunListFragment()));
+        cardTraining.setOnClickListener(v -> go(new PlansFragment()));
+        navRun.setOnClickListener(v -> go(new RunFragment()));
+        navPlans.setOnClickListener(v -> go(new PlansFragment()));
+        navHistory.setOnClickListener(v -> go(new RunListFragment()));
+    }
+
+    private void go(Fragment dest) {
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.frameLayout, destination)
+                .replace(R.id.frameLayout, dest)
                 .addToBackStack(null)
                 .commit();
     }
 
-    // ── Firebase: profile image ────────────────────────────
+    // ── Profile image ─────────────────────────────────────
 
     private void loadUserProfileImage() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) return;
-
         String uid = auth.getCurrentUser().getUid();
-
         db.collection("Users").document(uid).get()
-                .addOnSuccessListener(documentSnapshot -> {
+                .addOnSuccessListener(doc -> {
                     if (!isAdded() || getContext() == null) return;
                     if (imgNavProfile == null) return;
-
-                    if (documentSnapshot.exists()) {
-                        User user = documentSnapshot.toObject(User.class);
-                        if (user != null
-                                && user.getImgpro() != null
+                    if (doc.exists()) {
+                        User user = doc.toObject(User.class);
+                        if (user != null && user.getImgpro() != null
                                 && !user.getImgpro().isEmpty()) {
                             Picasso.get()
                                     .load(user.getImgpro())
@@ -165,89 +161,65 @@ public class AdminFragment extends Fragment {
                     }
                 })
                 .addOnFailureListener(e ->
-                        Log.e("AdminFragment", "Error loading profile image", e));
+                        Log.e("AdminFragment", "Profile image error", e));
     }
 
-    // ── Firebase: weekly stats ─────────────────────────────
+    // ── Weekly stats ──────────────────────────────────────
 
     private void loadWeeklyStats() {
-        String uid = fbs.getCurrentUid();
-        if (uid == null) return;
-
         fbs.getUserRuns(task -> {
             if (!isAdded() || getContext() == null) return;
             if (!task.isSuccessful() || task.getResult() == null) return;
 
-            double totalKm   = 0;
-            double totalPace = 0;
-            double totalBpm  = 0;
-            int    count     = 0;
-            RunItem latestRun = null;
+            double totalKm = 0, totalPace = 0, totalBpm = 0;
+            int    count   = 0;
+            RunItem latest = null;
 
             for (QueryDocumentSnapshot doc : task.getResult()) {
                 RunItem run = doc.toObject(RunItem.class);
                 run.setId(doc.getId());
 
-                // Accumulate distance
-                try {
-                    if (run.getDistance() != null)
-                        totalKm += Double.parseDouble(run.getDistance());
-                } catch (NumberFormatException ignored) {}
+                try { if (run.getDistance() != null)
+                    totalKm += Double.parseDouble(run.getDistance()); }
+                catch (Exception ignored) {}
 
-                // Accumulate pace seconds
-                try {
-                    if (run.getAvgpace() != null && !run.getAvgpace().isEmpty())
-                        totalPace += Utils.timeStringToSeconds(run.getAvgpace());
-                } catch (Exception ignored) {}
+                try { if (run.getAvgpace() != null && !run.getAvgpace().isEmpty())
+                    totalPace += Utils.timeStringToSeconds(run.getAvgpace()); }
+                catch (Exception ignored) {}
 
-                // Accumulate BPM
-                try {
-                    if (run.getBPM() != null)
-                        totalBpm += Double.parseDouble(run.getBPM());
-                } catch (NumberFormatException ignored) {}
+                try { if (run.getBPM() != null)
+                    totalBpm += Double.parseDouble(run.getBPM()); }
+                catch (Exception ignored) {}
 
-                // Track most recent run (Firestore orders by date desc)
-                if (latestRun == null) latestRun = run;
-
+                if (latest == null) latest = run;
                 count++;
             }
 
-            // ── Update distance card ──
-            String distText = String.format("%.1f", totalKm);
-            tvWeeklyDistance.setText(distText);
-            tvDailyGoal.setText("TOTAL: " + distText + " KM");
+            // Distance
+            tvWeeklyDistance.setText(String.format("%.1f", totalKm));
+            tvDailyGoal.setText("TOTAL: " + String.format("%.1f", totalKm) + " KM");
+            tvDistanceChange.setText(count > 0 ? count + " runs" : "");
 
-            // ── Update avg pace card ──
+            // Pace
             if (count > 0) {
-                long avgPaceSec = (long) (totalPace / count);
-                tvAvgPace.setText(Utils.secondsToTimeString(avgPaceSec) + "\"");
+                long pSec = (long)(totalPace / count);
+                tvAvgPace.setText(Utils.secondsToTimeString(pSec) + "\"");
+                tvAvgHR.setText(String.valueOf((int)(totalBpm / count)));
             } else {
                 tvAvgPace.setText("--:--");
-            }
-
-            // ── Update avg HR card ──
-            if (count > 0) {
-                int avgBpm = (int) (totalBpm / count);
-                tvAvgHR.setText(String.valueOf(avgBpm));
-            } else {
                 tvAvgHR.setText("--");
             }
 
-            // ── Update latest activity row ──
-            if (latestRun != null) {
+            // Latest run
+            if (latest != null) {
                 tvActivityName.setText(
-                        "RUN · " + Utils.formatDisplayDate(latestRun.getDate()));
+                        "RUN · " + Utils.formatDisplayDate(latest.getDate()));
                 tvActivityMeta.setText(
-                        latestRun.getDistance() + " KM  ·  " + latestRun.getTime());
-
-                // Tap latest activity → open its details
-                final RunItem finalRun = latestRun;
+                        latest.getDistance() + " KM  ·  " + latest.getTime());
+                final RunItem fin = latest;
                 cardLatestActivity.setOnClickListener(v ->
-                        navigateTo(RunDetailsFragment.newInstance(finalRun)));
+                        go(RunDetailsFragment.newInstance(fin)));
             }
-
-            // ── Update distance change badge (placeholder logic) ──
-            tvDistanceChange.setText(count > 0 ? "+" + count + " runs" : "");
         });
     }
 }

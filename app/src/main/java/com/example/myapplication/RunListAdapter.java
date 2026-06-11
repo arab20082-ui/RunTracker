@@ -51,9 +51,7 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.MyViewHo
     }
 
     @Override
-    public int getItemCount() {
-        return runList.size();
-    }
+    public int getItemCount() { return runList.size(); }
 
     public void setRuns(ArrayList<RunItem> newRuns) {
         runList.clear();
@@ -61,19 +59,22 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.MyViewHo
         notifyDataSetChanged();
     }
 
-    public RunItem getRunAt(int position) {
-        return runList.get(position);
-    }
+    public RunItem getRunAt(int position) { return runList.get(position); }
 
     public void removeAt(int position) {
         runList.remove(position);
         notifyItemRemoved(position);
     }
 
-    // ── ViewHolder ────────────────────────────────────────
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener l) {
+        this.itemClickListener = l;
+    }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
         TextView tvDistance, tvTime, tvCalories, tvStreak, tvPace, tvBPM, tvDate;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -86,15 +87,5 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.MyViewHo
             tvBPM      = itemView.findViewById(R.id.tvBPMRow);
             tvDate     = itemView.findViewById(R.id.tvDateRow);
         }
-    }
-
-    // ── Click interface ───────────────────────────────────
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.itemClickListener = listener;
     }
 }

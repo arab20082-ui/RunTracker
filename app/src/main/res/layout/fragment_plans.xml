@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:fillViewport="true"
+    android:overScrollMode="never">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="40dp">
+
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="52dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:text="PLANS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:fontFamily="sans-serif-black"
+                android:letterSpacing="0.02"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:text="Choose a training plan and start running."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#555555"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif" />
+
+        </LinearLayout>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--     FEATURED PLAN — 5K BEGINNER    -->
+        <!-- ═══════════════════════════════════ -->
+        <FrameLayout
+            android:id="@+id/cardPlan1"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#0D0D0D">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/run_hero_photo"
+                    android:alpha="0.3"
+                    android:contentDescription="Plan background" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="bottom">
+
+                <TextView
+                    android:text="BEGINNER"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="0.16"
+                    android:alpha="0.6"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:text="5K IN 4 WEEKS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-black"
+                    android:letterSpacing="0.02"
+                    android:layout_marginBottom="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_weight="0.35"
+                        android:background="#FFFFFF" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_weight="0.65"
+                        android:background="#333333" />
+
+                    <TextView
+                        android:text="  0% COMPLETE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#888888"
+                        android:textSize="10sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.08" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- SECTION LABEL -->
+        <TextView
+            android:text="ALL PLANS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#444444"
+            android:textSize="10sp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.16"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- ═══════════════════════════════════ -->
+        <!--       10K BUILDER                  -->
+        <!-- ═══════════════════════════════════ -->
+        <LinearLayout
+            android:id="@+id/cardPlan2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="18dp"
+            android:gravity="center_vertical"
+            android:background="#0D0D0D"
+            android:layout_marginBottom="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <!-- Color bar -->
+            <View
+                android:layout_width="3dp"
+                android:layout_height="52dp"
+                android:background="#FFFFFF"
+                android:layout_marginEnd="16dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="INTERMEDIATE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#555555"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="0.12"
+                    android:layout_marginBottom="3dp" />
+
+                <TextView
+                    android:text="10K BUILDER"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-black"
+                    android:letterSpacing="0.02"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:text="6 weeks · 3 runs/week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#555555"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_arrow_right"
+                android:alpha="0.3"
+                android:contentDescription="Start" />
+
+        </LinearLayout>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--       INTERVAL SPEED               -->
+        <!-- ═══════════════════════════════════ -->
+        <LinearLayout
+            android:id="@+id/cardPlan3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="18dp"
+            android:gravity="center_vertical"
+            android:background="#0D0D0D"
+            android:layout_marginBottom="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <View android:layout_width="3dp" android:layout_height="52dp" android:background="#FFFFFF" android:layout_marginEnd="16dp" />
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:text="ADVANCED" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="10sp" android:fontFamily="sans-serif-medium" android:letterSpacing="0.12" android:layout_marginBottom="3dp" />
+                <TextView android:text="INTERVAL SPEED" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="18sp" android:fontFamily="sans-serif-black" android:letterSpacing="0.02" android:layout_marginBottom="4dp" />
+                <TextView android:text="4 weeks · 4 runs/week" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="12sp" android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+            <ImageView android:layout_width="16dp" android:layout_height="16dp" android:src="@drawable/ic_arrow_right" android:alpha="0.3" android:contentDescription="Start" />
+
+        </LinearLayout>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--       HALF MARATHON                -->
+        <!-- ═══════════════════════════════════ -->
+        <LinearLayout
+            android:id="@+id/cardPlan4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="18dp"
+            android:gravity="center_vertical"
+            android:background="#0D0D0D"
+            android:layout_marginBottom="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <View android:layout_width="3dp" android:layout_height="52dp" android:background="#FFFFFF" android:layout_marginEnd="16dp" />
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:text="ADVANCED" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="10sp" android:fontFamily="sans-serif-medium" android:letterSpacing="0.12" android:layout_marginBottom="3dp" />
+                <TextView android:text="HALF MARATHON" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="18sp" android:fontFamily="sans-serif-black" android:letterSpacing="0.02" android:layout_marginBottom="4dp" />
+                <TextView android:text="12 weeks · 4 runs/week" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="12sp" android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+            <ImageView android:layout_width="16dp" android:layout_height="16dp" android:src="@drawable/ic_arrow_right" android:alpha="0.3" android:contentDescription="Start" />
+
+        </LinearLayout>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--       RECOVERY RUN                 -->
+        <!-- ═══════════════════════════════════ -->
+        <LinearLayout
+            android:id="@+id/cardPlan5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="18dp"
+            android:gravity="center_vertical"
+            android:background="#0D0D0D"
+            android:layout_marginBottom="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <View android:layout_width="3dp" android:layout_height="52dp" android:background="#FFFFFF" android:layout_marginEnd="16dp" />
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:text="ALL LEVELS" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="10sp" android:fontFamily="sans-serif-medium" android:letterSpacing="0.12" android:layout_marginBottom="3dp" />
+                <TextView android:text="RECOVERY RUN" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="18sp" android:fontFamily="sans-serif-black" android:letterSpacing="0.02" android:layout_marginBottom="4dp" />
+                <TextView android:text="Standalone · Easy 20 min" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="12sp" android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+            <ImageView android:layout_width="16dp" android:layout_height="16dp" android:src="@drawable/ic_arrow_right" android:alpha="0.3" android:contentDescription="Start" />
+
+        </LinearLayout>
+
+        <!-- TIPS SECTION -->
+        <TextView
+            android:text="TRAINING TIPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#444444"
+            android:textSize="10sp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.16"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- TIP 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp"
+            android:background="#0D0D0D"
+            android:layout_marginBottom="1dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/input_bg_dark"
+                android:gravity="center"
+                android:layout_marginEnd="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="01" android:textColor="#FFFFFF" android:textSize="14sp" android:fontFamily="sans-serif-black" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:text="WARM UP FIRST" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="13sp" android:fontFamily="sans-serif-black" android:letterSpacing="0.02" android:layout_marginBottom="3dp" />
+                <TextView android:text="Walk briskly for 5 minutes before running to prepare your muscles." android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="12sp" android:fontFamily="sans-serif" android:lineSpacingMultiplier="1.4" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- TIP 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp"
+            android:background="#0D0D0D"
+            android:layout_marginBottom="1dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout android:layout_width="36dp" android:layout_height="36dp" android:background="@drawable/input_bg_dark" android:gravity="center" android:layout_marginEnd="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="02" android:textColor="#FFFFFF" android:textSize="14sp" android:fontFamily="sans-serif-black" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:text="STAY HYDRATED" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="13sp" android:fontFamily="sans-serif-black" android:letterSpacing="0.02" android:layout_marginBottom="3dp" />
+                <TextView android:text="Drink 500ml of water 2 hours before your run and sip during." android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="12sp" android:fontFamily="sans-serif" android:lineSpacingMultiplier="1.4" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- TIP 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp"
+            android:background="#0D0D0D"
+            android:gravity="center_vertical">
+
+            <LinearLayout android:layout_width="36dp" android:layout_height="36dp" android:background="@drawable/input_bg_dark" android:gravity="center" android:layout_marginEnd="14dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="03" android:textColor="#FFFFFF" android:textSize="14sp" android:fontFamily="sans-serif-black" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:text="REST DAYS MATTER" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="13sp" android:fontFamily="sans-serif-black" android:letterSpacing="0.02" android:layout_marginBottom="3dp" />
+                <TextView android:text="Your muscles grow during rest, not during the run. Take them seriously." android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#555555" android:textSize="12sp" android:fontFamily="sans-serif" android:lineSpacingMultiplier="1.4" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

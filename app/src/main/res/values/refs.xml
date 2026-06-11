@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="ic_user" />
     <drawable name="tag_bg" />
     <drawable name="ic_arrow_back" />
     <drawable name="circle_button_bg" />
-    <drawable name="gradient_hero_overlay" />
-    <drawable name="run_hero_photo" />
     <drawable name="circle_bg_sand" />
-    <drawable name="ic_arrow_right" />
     <drawable name="ic_list" />
     <drawable name="ic_add_run" />
     <drawable name="circle_bg_light" />
@@ -19,24 +15,17 @@
     <drawable name="ic_run_shoe" />
     <drawable name="ic_location" />
     <drawable name="ic_phone" />
-    <drawable name="ic_camera" />
     <drawable name="ic_route" />
     <drawable name="ic_search" />
-    <drawable name="ic_fire" />
     <drawable name="tag_bg_sand" />
-    <drawable name="ic_calendar" />
     <drawable name="dot_online" />
     <drawable name="ic_logout" />
     <drawable name="circle_bg_purple" />
     <drawable name="ic_trophy" />
-    <drawable name="ic_heart" />
     <drawable name="circle_bg_red" />
     <drawable name="circle_bg_amber" />
     <drawable name="ic_clock" />
     <drawable name="ic_bolt" />
-    <drawable name="ic_history" />
     <drawable name="nav_item_bg_active" />
-    <drawable name="ic_home" />
-    <drawable name="ic_play" />
     <drawable name="circle_bg_lime" />
 </resources>

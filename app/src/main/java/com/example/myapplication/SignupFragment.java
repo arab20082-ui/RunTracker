@@ -99,7 +99,7 @@ public class SignupFragment extends Fragment {
                     if (task.isSuccessful()) {
                         // ✅ Save user document to Firestore
                         // User constructor: username, firstName, lastName, email, address, phone, imgpro
-                        User newUser = new User(email, firstName, lastName, email, address, phone, "");
+                        User newUser = new User(firstName, lastName, email, address, phone, "");
 
                         fbs.getFirestore().collection("users").add(newUser).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
